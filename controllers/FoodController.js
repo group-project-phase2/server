@@ -13,7 +13,13 @@ class FoodController{
             method : "POST",
         })
         .then(response=>{
-            console.log(response.data.hits.recipe)
+            // let foodlabel = response.data.hits.label
+            let recipe = response.data.hits[0].recipe
+            let foodlabel = recipe.label
+            let foodImage = recipe.image
+            let foodIngredients = recipe.ingredientLines
+            // console.log(hits[0])
+            res.status(200).json({foodlabel, foodImage, foodIngredients})
         })
         .catch(next)
     
