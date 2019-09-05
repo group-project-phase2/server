@@ -1,0 +1,13 @@
+const express = require('express')
+const router = express.Router()
+
+router.get('/', function(req,res){
+
+    res.status(200).json("masuk ke index routes")
+
+})
+
+
+
+
+module.exports=router
