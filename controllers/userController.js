@@ -1,4 +1,3 @@
-// require("dotenv").config
 const User = require("../models/User")
 const { OAuth2Client } = require('google-auth-library');
 const Secret=process.env.JWT_SECRET
@@ -88,6 +87,7 @@ class UserControlller{
                 }
 
                 let token = jwt.sign(userdata,Secret)
+                // console.log(token)
                 res.status(200).json({token})
             })
             .catch(next)
