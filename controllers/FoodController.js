@@ -28,8 +28,13 @@ class FoodController {
                     
                     foodsInfo.push(eachFood)
                 }
-                
-                res.status(200).json({foodsInfo})
+                if (foodsInfo.length===0){
+                    next({status:404, message:"data not found"})
+                }
+                else{
+                    res.status(200).json({foodsInfo})
+
+                }
             })
             .catch(next)
 
@@ -40,19 +45,23 @@ class FoodController {
         const app_id = "097bd7fa"
         const app_key = "7a5aaaba187ec7777d65962096db95a8"
 
-        let ingredient = req.body.ingr
-        console.log(ingredient)
- 
+        let ingr = req.body.ingr
+        
         axios({
             url: `https://api.edamam.com/api/nutrition-details?app_id=${app_id}&app_key=${app_key}`,
             method: "POST",
             headers: { "Content-Type": "application/json" },
             data: {
-                ingredient
+                ingr
             }
         })
             .then(response => {
-                res.status(200).json(response.data)
+                let calories = response.data.calories + " cal"
+                let fat = response.data.totalNutrients.FAT.quantity
+                let sugar = response.data.totalNutrients.SUGAR.quantity
+                fat = fat.toFixed(2) + " g"
+                sugar = sugar.toFixed(2) + " g"
+                res.status(200).json({calories, fat, sugar})
             })
             .catch(next)
 
