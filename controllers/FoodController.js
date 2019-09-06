@@ -33,8 +33,8 @@ class FoodController {
                 }
                 else{
                     res.status(200).json({foodsInfo})
+
                 }
-                
             })
             .catch(next)
 
@@ -45,14 +45,14 @@ class FoodController {
         const app_id = "097bd7fa"
         const app_key = "7a5aaaba187ec7777d65962096db95a8"
 
-        let ingr = req.body.ingr
+        let ingredient = req.body.ingredient
  
         axios({
             url: `https://api.edamam.com/api/nutrition-details?app_id=${app_id}&app_key=${app_key}`,
             method: "POST",
             headers: { "Content-Type": "application/json" },
             data: {
-                ingr
+                ingredient
             }
         })
             .then(response => {
