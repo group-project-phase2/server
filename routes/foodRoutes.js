@@ -4,7 +4,9 @@ const FoodController =  require('../controllers/FoodController')
 const authentication = require('../middleware/authentication')
 
 
-router.get("/recipe", authentication, FoodController.recipe)
+router.use(authentication)
 
+router.get("/recipe/:id", FoodController.recipe)
+router.post("/nutrition", FoodController.nutrition)
 
 module.exports = router

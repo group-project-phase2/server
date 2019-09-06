@@ -1,7 +1,7 @@
 function errorHandler (err, req, res, next) {
     
     if(err.name=='JsonWebTokenError'){
-      console.log("masuk ke json error")
+      // console.log("masuk ke json error")
       res.status(401).json({
         message : "invalid token"
       })
@@ -13,7 +13,7 @@ function errorHandler (err, req, res, next) {
       })
     }
     else {
-      res.status(err.code || 500).json({
+      res.status(err.status || 500).json({
         message : err.message
       })
     }
