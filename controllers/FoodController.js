@@ -28,8 +28,13 @@ class FoodController {
                     
                     foodsInfo.push(eachFood)
                 }
+                if (foodsInfo.length===0){
+                    next({status:404, message:"data not found"})
+                }
+                else{
+                    res.status(200).json({foodsInfo})
+                }
                 
-                res.status(200).json({foodsInfo})
             })
             .catch(next)
 
